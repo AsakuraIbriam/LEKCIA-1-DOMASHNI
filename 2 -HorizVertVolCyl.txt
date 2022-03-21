@@ -1,0 +1,49 @@
+#include "stdio.h"
+#include "math.h"
+#define PI 3.14
+int main(int argc, char **argv[]) {
+
+
+double fullCylHeight, cylLiqHeight, cylDiamater, vertVol, horizVol;
+int choice = 0;
+
+do {
+
+printf("Enter the cylinder height in m: ");
+scanf("%lf", &fullCylHeight);
+printf("\n");
+
+printf("Enter fluid height in m: ");
+scanf("%lf", &cylLiqHeight);
+printf("\n");
+
+printf("Enter diameter of the cylinder in m: ");
+scanf("%lf", &cylDiamater);
+printf("\n");
+
+printf("Enter 1 for Vertical volume calc or 2 for horizontal volume: ");
+scanf("%d", &choice);
+printf("\n");
+
+} while(fullCylHeight <= 0 || cylDiamater <= 0 || cylLiqHeight <= 0);
+
+double radius = 1.0*cylDiamater / 2;
+
+if(choice == 1) {
+        vertVol = PI * (1.0*cylDiamater / 2) * cylLiqHeight;
+        printf("Vertical volume is: %.2lf mm3", vertVol);
+        printf("\n");
+} else if(choice == 2) {
+
+        double area = acos((radius -cylLiqHeight)/radius)*radius*radius - (radius - cylLiqHeight)*sqrt(2*radius*cylLiqHeight - cylLiqHeight*cylLiqHeight);
+        horizVol = fullCylHeight * area;
+        printf("The horiz volume is: %.2lf mm3", horizVol);
+
+} else {
+    printf("Invalid choice, exiting the program...");
+    exit(1);
+
+}
+
+return 0;
+}
